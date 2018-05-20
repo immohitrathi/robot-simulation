@@ -22,7 +22,7 @@ The page will reload if you make edits.<br>
 
 ### `CI=true npm test`
 
-Launches the test runner in the interactive watch mode.<br>
+Launches the test runner and runs all tests in the application.<br>
 
 ### `npm run build`
 
@@ -36,7 +36,7 @@ Your app is ready to be deployed!
 
 Find the simulator commands definition below:
 
-- **PLACE X, Y, DIRECTION (PLACE 0,1,NORTH):** Place the robot on the table.
+- **PLACE X, Y, DIRECTION (PLACE 0,1,0):** Place the robot on the table.
 - **MOVE:** Move the robot one unit in the direction it is facing
 - **LEFT:** Turn the robot left
 - **RIGHT:** Turn the robot right

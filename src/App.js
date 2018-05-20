@@ -70,9 +70,7 @@ class App extends Component {
     }
 
     if (xPos<0 || xPos>4 || yPos<0 || yPos>4) {
-      this.setState({
-          X: this.state.X, Y: this.state.Y, F: this.state.F
-      })
+      return false;
     }else {
       this.setState({
         X: xPos,
