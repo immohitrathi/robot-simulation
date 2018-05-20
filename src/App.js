@@ -7,6 +7,7 @@ import Report from './components/Report';
 import PlaceRobot from './components/PlaceRobot';
 import Directions from './components/Directions';
 
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -26,9 +27,7 @@ class App extends Component {
 
   handlePlaceRobot(x, y, f) {
     if (x<0 || x>4 || y<0 || y>4) {
-      this.setState({
-          X: this.state.X, Y: this.state.Y, F: this.state.F
-      })  
+      return;
     }else{
       this.setState({
           X: x, Y: y, F: f, isPlaced: true
@@ -37,23 +36,25 @@ class App extends Component {
   }
 
   handleLeftCommand() {
-    if(!this.state.isPlaced) return;
+    if(!this.state.isPlaced) return false;
     const nextDirection = this.state.F-90; 
     this.setState({
       F: nextDirection
     })
+    return true;
   }
 
   handleRightCommand() {
-    if(!this.state.isPlaced) return;
+    if(!this.state.isPlaced) return false;
     const nextDirection = this.state.F+90; 
     this.setState({
       F: nextDirection
     })
+    return true;
   }
 
   handleMoveCommand() {
-    if(!this.state.isPlaced) return;
+    if(!this.state.isPlaced) return false;
     const currentDirection = this.state.F%360;
     let xPos = this.state.X;
     let yPos = this.state.Y;            
@@ -78,7 +79,7 @@ class App extends Component {
         Y: yPos
       })
     }
-    
+    return true;
   }
 
   render() {
