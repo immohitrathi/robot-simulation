@@ -1,6 +1,6 @@
 # Robot simulator
 
-A robot simulator written in React 
+A robot simulator written in React which works offline as well
 
 ## Installation & usage
 
@@ -41,6 +41,8 @@ Find the simulator commands definition below:
 - **LEFT:** Turn the robot left
 - **RIGHT:** Turn the robot right
 - **REPORT:** Report the current position and direction of the robot (0,0,NORTH)
+
+## PS: Try going offline. Woohoo it still works. 
 
 The table is a 5x5 grid, and any command that would result in the robot being off the table *will be ignored*.
 
