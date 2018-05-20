@@ -8,6 +8,11 @@ class Robot extends React.PureComponent { // eslint-disable-next-line
     }
     componentWillReceiveProps(nextProps) {
         const robot = document.getElementById('robot');
+        if (!nextProps.isPlaced) {
+            robot.style.display = 'none';
+            return
+        }
+
         let xPos = nextProps.xPosition * 100 + 25;
         let yPos = nextProps.yPosition * 100 + 25;
         robot.style.display = 'block';
@@ -16,7 +21,7 @@ class Robot extends React.PureComponent { // eslint-disable-next-line
 
     render() {
         return(
-            <Wrapper id='robot'>^^</Wrapper>
+            <Wrapper id='robot'></Wrapper>
         );
     }
 }
@@ -24,7 +29,8 @@ class Robot extends React.PureComponent { // eslint-disable-next-line
 Robot.propTypes = {
     xPosition: PropTypes.number,
     yPosition: PropTypes.number,
-    facePosition: PropTypes.number
+    facePosition: PropTypes.number,
+    isPlaced: PropTypes.bool
 }
 
 

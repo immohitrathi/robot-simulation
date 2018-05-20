@@ -12,13 +12,13 @@ class Directions extends React.PureComponent {
         this.handleMoveForward = this.handleMoveForward.bind(this);
     }
     handleRotateLeft() {
-        this.props.rotateLeftCommand();
+        this.props.left();
     }
     handleRotateRight() {        
-        this.props.rotateRightCommand();
+        this.props.right();
     }
     handleMoveForward() {
-        this.props.moveForwardCommand();
+        this.props.move();
     }
     render() {
         return(

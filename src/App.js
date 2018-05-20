@@ -14,10 +14,14 @@ class App extends Component {
     this.state = {
         X: 0,
         Y: 0,
-        F: 0
+        F: 0,
+        isPlaced: false
     }
 
     this.handlePlaceRobot = this.handlePlaceRobot.bind(this);
+    this.handleMoveCommand = this.handleMoveCommand.bind(this);
+    this.handleLeftCommand = this.handleLeftCommand.bind(this);
+    this.handleRightCommand = this.handleRightCommand.bind(this);
   }
 
   handlePlaceRobot(x, y, f) {
@@ -27,9 +31,54 @@ class App extends Component {
       })  
     }else{
       this.setState({
-          X: x, Y: y, F: f
+          X: x, Y: y, F: f, isPlaced: true
       })
     }
+  }
+
+  handleLeftCommand() {
+    if(!this.state.isPlaced) return;
+    const nextDirection = this.state.F-90; 
+    this.setState({
+      F: nextDirection
+    })
+  }
+
+  handleRightCommand() {
+    if(!this.state.isPlaced) return;
+    const nextDirection = this.state.F+90; 
+    this.setState({
+      F: nextDirection
+    })
+  }
+
+  handleMoveCommand() {
+    if(!this.state.isPlaced) return;
+    const currentDirection = this.state.F%360;
+    let xPos = this.state.X;
+    let yPos = this.state.Y;            
+
+    if (currentDirection === 0 || currentDirection === 1 || currentDirection === -1) {
+        yPos--;
+    } else if (currentDirection === 90 || currentDirection === -270) {
+        xPos++;
+    } else if (currentDirection === 180 || currentDirection === -180) {
+        yPos++;
+    } else if (currentDirection === 270 || currentDirection === -90) {
+        xPos--;
+    }
+
+    if (xPos<0 || xPos>4 || yPos<0 || yPos>4) {
+      this.setState({
+          X: this.state.X, Y: this.state.Y, F: this.state.F
+      })
+    }else {
+      this.setState({
+        X: xPos,
+        Y: yPos
+      })
+    }
+    
   }
 
   render() {
@@ -42,12 +91,12 @@ class App extends Component {
         <div className="app-content">
           <div className="table-top">
             <TableTop/>
-            <Robot xPosition={this.state.X} yPosition={this.state.Y} facePosition={this.state.F}/>
+            <Robot xPosition={this.state.X} yPosition={this.state.Y} facePosition={this.state.F} isPlaced={this.state.isPlaced}/>
           </div>
           <div className="commands-container">
             <PlaceRobot placeRobotPos={this.handlePlaceRobot}/>
-            <Directions/>
-            <Report/>
+            <Directions move={this.handleMoveCommand} left={this.handleLeftCommand} right={this.handleRightCommand}/>
+            <Report xPosition={this.state.X} yPosition={this.state.Y} facePosition={this.state.F} isPlaced={this.state.isPlaced}/>
           </div>
         </div>
       </div>

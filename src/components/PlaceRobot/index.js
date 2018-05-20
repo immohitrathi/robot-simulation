@@ -45,7 +45,7 @@ class PlaceRobot extends React.PureComponent {
     render() {
         return(
             <Wrapper>
-                <h4>Initial Command</h4>
+                <h4>Place the Robot on table first</h4>
                 <Input 
                     placeholder='X' 
                     className='input-x' 
@@ -60,7 +60,7 @@ class PlaceRobot extends React.PureComponent {
                     className='select-face' 
                     selectedOption={this.handleSelectedFace}
                 />
-                <Button onClick={this.handlePlaceCommand} text='Place Robot'/>
+                <Button onClick={this.handlePlaceCommand} text='PLACE'/>
             </Wrapper>
         );
     }

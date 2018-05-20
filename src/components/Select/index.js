@@ -21,10 +21,10 @@ class Select extends React.PureComponent {
                     className={this.props.className}
                     onChange={this.handleSelectedOptions}
                 >
-                    <option value='0'>South</option>
-                    <option value='90'>West</option>
-                    <option value='180'>North</option>
-                    <option value='270'>East</option>
+                    <option value='0'>North</option>
+                    <option value='90'>East</option>
+                    <option value='180'>South</option>
+                    <option value='270'>West</option>
                 </select>
             </Wrapper>
         );
