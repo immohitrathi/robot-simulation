@@ -4,18 +4,18 @@
 
 .app-logo {
   animation: app-logo-spin infinite 5s linear;
-  height: 40px;
+  height: 25px;
 }
 
 .app-header {
   background-color: #222;
-  height: 90px;
-  padding: 20px;
+  height: 60px;
+  padding: 15px;
   color: white;
 }
 
 .app-title {
-  font-size: 1.5em;
+  font-size: 1.4em;
 }
 
 .app-intro {
@@ -25,4 +25,18 @@
 @keyframes app-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+.app-content {
+  width: 100%;
+  padding: 20px 0;
+  overflow: hidden;
+}
+.table-top {
+  width: 505px;
+  height: 505px;
+  margin: 0 10px 10px;
+  float: left;
+}
+.commands-container {
+  float: left;
 }
