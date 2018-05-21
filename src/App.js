@@ -6,7 +6,8 @@ import Robot from './components/Robot';
 import Report from './components/Report';
 import PlaceRobot from './components/PlaceRobot';
 import Directions from './components/Directions';
-
+import Message from './components/Message';
+import MessageTypes from './components/Message/MessageTypes';
 
 class App extends Component {
   constructor(props) {
@@ -16,7 +17,8 @@ class App extends Component {
         X: 0,
         Y: 0,
         F: 0,
-        isPlaced: false
+        isPlaced: false,
+        type: ''
     }
 
     this.handlePlaceRobot = this.handlePlaceRobot.bind(this);
@@ -27,34 +29,54 @@ class App extends Component {
 
   handlePlaceRobot(x, y, f) {
     if (x<0 || x>4 || y<0 || y>4) {
+      this.setState({
+          type: MessageTypes.INVALID_POSITION 
+      })
       return;
     }else{
       this.setState({
-          X: x, Y: y, F: f, isPlaced: true
+          X: x, Y: y, F: f, isPlaced: true, type: ''
       })
     }
   }
 
   handleLeftCommand() {
-    if(!this.state.isPlaced) return false;
+    if(!this.state.isPlaced) {
+      this.setState({
+          type: MessageTypes.ROBOT_NOT_PLACED 
+      })
+      return false;
+    }
     const nextDirection = this.state.F-90; 
     this.setState({
-      F: nextDirection
+      F: nextDirection,
+      type: ''
     })
     return true;
   }
 
   handleRightCommand() {
-    if(!this.state.isPlaced) return false;
+    if(!this.state.isPlaced) {
+      this.setState({
+          type: MessageTypes.ROBOT_NOT_PLACED 
+      })
+      return false;
+    }
     const nextDirection = this.state.F+90; 
     this.setState({
-      F: nextDirection
+      F: nextDirection,
+      type: ''
     })
     return true;
   }
 
   handleMoveCommand() {
-    if(!this.state.isPlaced) return false;
+    if(!this.state.isPlaced) {
+      this.setState({
+          type: MessageTypes.ROBOT_NOT_PLACED 
+      })
+      return false;
+    }
     const currentDirection = this.state.F%360;
     let xPos = this.state.X;
     let yPos = this.state.Y;            
@@ -70,11 +92,15 @@ class App extends Component {
     }
 
     if (xPos<0 || xPos>4 || yPos<0 || yPos>4) {
+      this.setState({
+        type: MessageTypes.MOVE_NOT_ALLOWED 
+      })
       return false;
     }else {
       this.setState({
         X: xPos,
-        Y: yPos
+        Y: yPos,
+        type: ''
       })
     }
     return true;
@@ -93,6 +119,7 @@ class App extends Component {
             <Robot xPosition={this.state.X} yPosition={this.state.Y} facePosition={this.state.F} isPlaced={this.state.isPlaced}/>
           </div>
           <div className="commands-container">
+            <Message mtype={this.state.type}/>
             <PlaceRobot placeRobotPos={this.handlePlaceRobot}/>
             <Directions move={this.handleMoveCommand} left={this.handleLeftCommand} right={this.handleRightCommand}/>
             <Report xPosition={this.state.X} yPosition={this.state.Y} facePosition={this.state.F} isPlaced={this.state.isPlaced}/>
